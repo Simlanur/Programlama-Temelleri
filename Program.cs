@@ -4,47 +4,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using System;
-
-namespace İkiSayıToplama
+namespace or218
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Console.Write("İki sayı girin (ayrı ayrı): ");
+            int a;
+            string[] il = { "Muş", "Ağrı", "Bolu", "Mersin", "Ankara", "Sivas", "Kayseri" };
+            string[] isim = { "Asuman", "İclal", "Emin", "Bekir", "Ahmet", "Can", "Esma" };
+            bool[] D = new bool[7];
 
-            if (int.TryParse(Console.ReadLine(), out int sayi1) && int.TryParse(Console.ReadLine(), out int sayi2))
+            for (a = 0; a <= 6; a++)
+                Console.WriteLine("Bool D dizisinin " + a + ". elemanı= " + D[a]);
+
+            Random rastgele = new Random();
+
+            for (a = 0; a <= 6; a++)
             {
-                Console.Write("TEK’leri mi ÇİFT’leri mi toplamak istersiniz? (TEK/ÇİFT): ");
-                string secim = Console.ReadLine().ToUpper();
-
-                if (secim == "TEK" || secim == "ÇİFT")
+                int sayi;
+                do
                 {
-                    int toplam = 0;
+                    sayi = rastgele.Next(0, 7); // 0 dahil, 7 dahil değil.
+                } while (D[sayi] == true);
 
-                    int baslangic = Math.Min(sayi1, sayi2);
-                    int bitis = Math.Max(sayi1, sayi2);
-
-                    for (int i = baslangic; i <= bitis; i++)
-                    {
-                        if ((secim == "TEK" && i % 2 != 0) || (secim == "ÇİFT" && i % 2 == 0))
-                        {
-                            toplam += i;
-                        }
-                    }
-
-                    Console.WriteLine($"{sayi1} ile {sayi2} arasındaki {secim} sayıların toplamı: {toplam}");
-                }
-                else
-                {
-                    Console.WriteLine("Geçerli bir seçim yapmadınız (TEK/ÇİFT).");
-                }
+                D[sayi] = true;
+                Console.WriteLine(isim[a] + "\t= " + il[sayi]);
             }
-            else
-            {
-                Console.WriteLine("Geçerli sayılar girmediniz.");
-            }
+
+            for (a = 0; a <= 6; a++)
+                Console.WriteLine("Bool D dizisinin " + a + ". elemanı= " + D[a]);
+
+            Console.Write("Press any key to continue . . . ");
+            Console.ReadKey(true);
         }
     }
 }
